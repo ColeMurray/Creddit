@@ -47,14 +47,9 @@ angular
           }
         }
       })
-      .when('/user/:userId', {
+      .when('/users/:userId', {
         templateUrl: 'views/profile.html',
-        controller: 'AuthCtrl',
-        resolve:{
-            user: function(Auth){
-              return Auth.resolveUser();
-            }
-        }
+        controller: 'ProfileCtrl',
       })
       .otherwise({
         redirectTo: '/'

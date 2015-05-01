@@ -1,10 +1,23 @@
 <div class="container">
 	<div class="row">
-		<div class = "col-xs-1 col-md-4">
-			<h2>{{user.profile.username}}</h2>
-		</div>
-		<div class="col-xs-11 col-md-8">
-			<h2>{{user.uid}}</h2>
+		<div class = "col-sm-12">
+			<h2>{{profile.username}}</h2>
 		</div>
 	</div>
+
+	<div class="row" ng-repeat="(key,post) in posts">
+		<!-- this ng-hide is to hide posts that have been deleted -->
+		<div class="col-md-8 col-xs-10" ng-hide="!post.title" >
+			<div>
+				<a ng-href="{{post.url}}" >
+					{{post.title}}
+					<span class="url">({{post.url | hostnameFromUrl}})</span>
+				</a>
+			</div>
+			<div>
+				<a ng-href="#/posts/{{post.$id}}">Comments</a>
+			</div>
+		</div>
+	</div> 
+
 </div>

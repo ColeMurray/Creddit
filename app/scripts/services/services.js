@@ -9,8 +9,8 @@ angular.module('credditApp')
 			all: posts,
 			create: function (post){
 				return posts.$add(post).then(function(postRef){
-					ref.child('_userposts').child(post.creatorUID)
-								.push(postRef.name());
+					$firebaseArray(ref.child('_userposts').child(post.creatorUID))
+								.$add(postRef.key());
 					return postRef;
 				});
 			},
@@ -19,7 +19,11 @@ angular.module('credditApp')
 			},
 			delete: function (post){
 				return posts.$remove(post);
+			},
+			comments: function(postId){
+				return $firebaseArray((ref.child('comments')).child(postId));
 			}
+		
 		};
 
 		return Post;

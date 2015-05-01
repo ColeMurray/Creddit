@@ -41,11 +41,10 @@ angular.module('credditApp')
 		};
 
 		$rootScope.$on('$firebaseAuth:authWithPassword', function(e,user) {
-    		console.log('logged in meeeooow');
+    		console.log('logged in');
    			angular.copy(user, Auth.user);
    			Auth.user.profile = $firebaseObject(ref.child('profile').child(Auth.user.uid));
-   			console.log(Auth.user);
-   			console.log(Auth.user.profile);
+   			
   		});
   		$rootScope.$on('$firebaseAuth:unauth', function() {
     		console.log('logged out');

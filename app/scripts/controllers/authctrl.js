@@ -22,7 +22,6 @@ angular.module('credditApp')
 
 		$scope.login = function(){
 			Auth.login($scope.user).then(function(userData){
-				console.log(userData.uid);
 				$location.path('/');
 			}, function(error){
 				$scope.error = error.toString();
