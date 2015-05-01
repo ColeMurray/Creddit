@@ -4,7 +4,7 @@
 	<div class="col-xs-1"></div>
 	<div class="col-md-9 col-xs-11">
 		<div>
-			<a ng-href="{{post.url}}">
+			<a ng-href="{{post.url}}" target="_blank">
 				{{post.title}}
 				<span class="url">({{post.url | hostnameFromUrl}})</span>
 			</a>
@@ -14,6 +14,7 @@
 			<a ng-href="#/posts/{{post.$id}}">comments</a>
 			<a ng-click="deletePost(post)" ng-show="user.uid === post.creatorUID">delete</a>
 		</div>
+		<hr>
 	</div>
 	<div class="col-md-2"></div>
 </div>

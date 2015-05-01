@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('credditApp')
-	.factory('Auth', function($firebaseAuth, $firebase, $firebaseObject, FIREBASE_URL, $rootScope){
+	.factory('Auth', function($firebaseAuth, $firebase, $firebaseObject, FIREBASE_URL){
 		var ref = new Firebase(FIREBASE_URL);
 		var auth = $firebaseAuth(ref);
 
@@ -19,16 +19,10 @@ angular.module('credditApp')
 			},
 			login: function(user){
 				var authr = auth.$authWithPassword(user);
-				authr.then(function(userData){
-					$rootScope.$broadcast('$firebaseAuth:authWithPassword',userData);
-				});
 				return authr;
-				
-
 			},
 			logout: function(){
 				auth.$unauth();
-				$rootScope.$broadcast('$firebaseAuth:unauth');
 			
 			},
 			resolveUser: function(){
@@ -39,21 +33,5 @@ angular.module('credditApp')
 			},
 			user:{}
 		};
-
-		$rootScope.$on('$firebaseAuth:authWithPassword', function(e,user) {
-    		console.log('logged in');
-   			angular.copy(user, Auth.user);
-   			Auth.user.profile = $firebaseObject(ref.child('profile').child(Auth.user.uid));
-   			
-  		});
-  		$rootScope.$on('$firebaseAuth:unauth', function() {
-    		console.log('logged out');
-    		if (Auth.user && Auth.user.profile){
-    			Auth.user.profile.$destroy();
-    		}
-    		angular.copy({}, Auth.user);
-  		});
-
-
 		return Auth;
 	});
