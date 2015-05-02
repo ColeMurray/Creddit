@@ -4,7 +4,7 @@ angular.module('credditApp')
 	.controller('NavCtrl', function($scope,Post, Profile,$location,Auth){
 		$scope.signedIn = Auth.signedIn;
 		$scope.logout = Auth.logout;
-		$scope.user = Auth.resolveUser();
+		$scope.user = Auth.resolveUser() ? Auth.resolveUser() : {};
 		$scope.user.profile = Profile.get($scope.user.uid);
 
 		$scope.post = {url : 'http://', title: ''};

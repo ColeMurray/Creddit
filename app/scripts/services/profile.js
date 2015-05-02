@@ -6,6 +6,9 @@ angular.module('credditApp')
 
 		var Profile = {
 			get: function(userId){
+				if (userId == undefined){
+					return -1;
+				}
 				return $firebaseObject(ref.child('profile').child(userId));
 			},
 			getPosts: function(userId){
